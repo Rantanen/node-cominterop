@@ -1,6 +1,6 @@
 {
   "name": "cominterop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "COM interop layer for Node.JS",
   "main": "index.js",
   "scripts": {

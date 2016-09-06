@@ -33,6 +33,7 @@ obj.Async.GetItem()
 - Pointer return values won't work maintain identity: `obj.Member !== obj.Member`,
   when `Member` is non-primitive.
 - Support for several data types missing. `SAFE_ARRAY` the biggest one.
+- Only getters supported for indexed properties: `arr[ 0 ]`.
 - Uses `IDispatch` for method invocation.
 - My current test libraries are limited to [M-Files API](https://www.m-files.com/api/documentation/latest/index.html).
   Other libraries may be completely incompatible without me knowing about it.

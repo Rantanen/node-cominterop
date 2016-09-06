@@ -119,6 +119,15 @@ void InteropType::Init( const TypeLib* typeLib )
 					new CollectionInfo( new MethodInfo( typeInfo, typeattr->guid, i, typeLib ) ) );
 		}
 
+		// Check for 'Item( int )' method.
+		if( wcscmp( bstrFuncName, L"Item" ) == 0 &&
+			methodInfo->funcdesc->cParams == 1 &&
+			methodInfo->funcdesc->lprgelemdescParam[ 0 ].tdesc.vt == VT_I4 &&
+			methodInfo->funcdesc->lprgelemdescParam[ 0 ].paramdesc.wParamFlags & PARAMFLAG_FIN )
+		{
+			Nan::SetIndexedPropertyHandler( constructorTemplate->PrototypeTemplate(), GetIndex );
+		}
+
 		// Create the member function templates.
 		//
 		// We want to pass in methodInfo as external data so we need to do the
@@ -392,6 +401,13 @@ void InteropType::InvokeSyncOrAsync( bool isAsync, Nan::NAN_METHOD_ARGS_TYPE inf
 		// Return the promise.
 		info.GetReturnValue().Set( resolver->GetPromise() );
 	}
+}
+
+NAN_INDEX_GETTER( InteropType::GetIndex )
+{
+	auto getter = info.This()->Get( Nan::New( "get_Item" ).ToLocalChecked() ).As< v8::Function >();
+	v8::Local< v8::Value > localIndex = Nan::New( index + 1 );
+	info.GetReturnValue().Set( getter->Call( info.This(), 1, &localIndex ) );
 }
 
 namespace

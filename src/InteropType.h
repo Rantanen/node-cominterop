@@ -24,6 +24,7 @@ public:
 	static NAN_METHOD( NewAsync );
 	static NAN_METHOD( Invoke );
 	static NAN_METHOD( InvokeAsync );
+	static NAN_INDEX_GETTER( GetIndex );
 
 	static void InvokeSyncOrAsync( bool async, Nan::NAN_METHOD_ARGS_TYPE info );
 
