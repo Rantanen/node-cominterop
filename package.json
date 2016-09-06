@@ -1,5 +1,5 @@
 {
-  "name": "node-cominterop",
+  "name": "cominterop",
   "version": "0.1.0",
   "description": "COM interop layer for Node.JS",
   "main": "index.js",
